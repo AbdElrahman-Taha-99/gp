@@ -21,12 +21,13 @@ class_names = []
 with open("classes.txt", "r") as f:
     class_names = [cname.strip() for cname in f.readlines()]
 #  setttng up opencv net
-yoloNet = cv.dnn.readNet('pytorch','best100.pt', 'setup.cfg')
+# yoloNet = cv.dnn.readNet('pytorch','best100.pt', 'setup.cfg')
 
-yoloNet.setPreferableBackend(cv.dnn.DNN_BACKEND_CUDA)
-yoloNet.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA_FP16)
+# yoloNet.setPreferableBackend(cv.dnn.DNN_BACKEND_CUDA)
+# yoloNet.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA_FP16)
 
-model = cv.dnn_DetectionModel(yoloNet)
+# model = cv.dnn_DetectionModel(yoloNet)
+model = torch.hub.load('ultralytics/yolov5', 'custom', 'best100.pt')
 model.setInputParams(size=(416, 416), scale=1/255, swapRB=True)
 
 # object detector funciton /method
