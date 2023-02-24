@@ -1,5 +1,6 @@
 import cv2 as cv 
 import numpy as np
+import torch
 
 # Distance constants 
 KNOWN_DISTANCE = 3.7 #METERS
