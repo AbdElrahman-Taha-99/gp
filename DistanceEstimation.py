@@ -31,6 +31,7 @@ with open("classes.txt", "r") as f:
 model = torch.hub.load('ultralytics/yolov5', 'custom', 'best100.pt')
 # model.setInputParams(size=(416, 416), scale=1/255, swapRB=True)
 
+
 # object detector funciton /method
 def object_detector(image):
     classes, scores, boxes = model.detect(image, CONFIDENCE_THRESHOLD, NMS_THRESHOLD)
