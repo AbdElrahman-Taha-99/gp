@@ -74,28 +74,30 @@ car_data = object_detector(ref_car)
 car_width_in_rf = car_data[0][1]
 
 print(f"Car width in pixels : {car_width_in_rf}")
+focal_car = focal_length_finder(KNOWN_DISTANCE, CAR_WIDTH, car_width_in_rf)
+distance = distance_finder(focal_car, CAR_WIDTH, data)
+
 
 # finding focal length 
-focal_car = focal_length_finder(KNOWN_DISTANCE, CAR_WIDTH, car_width_in_rf)
 
 #focal_mobile = focal_length_finder(KNOWN_DISTANCE, MOBILE_WIDTH, mobile_width_in_rf)
-cap = cv.VideoCapture(0)
-while True:
-    ret, frame = cap.read()
+# cap = cv.VideoCapture(0)
+# while True:
+#     ret, frame = cap.read()
 
-    data = object_detector(frame) 
-    for d in data:
-        if d[0] =='car':
-            distance = distance_finder(focal_car, CAR_WIDTH, d[1])
-            x, y = d[2]
+#     data = object_detector(frame) 
+#     for d in data:
+#         if d[0] =='car':
+#             distance = distance_finder(focal_car, CAR_WIDTH, d[1])
+#             x, y = d[2]
 
-        cv.rectangle(frame, (x, y-3), (x+150, y+23),BLACK,-1 )
-        cv.putText(frame, f'Dis: {round(distance,2)} inch', (x+5,y+13), FONTS, 0.48, GREEN, 2)
+#         cv.rectangle(frame, (x, y-3), (x+150, y+23),BLACK,-1 )
+#         cv.putText(frame, f'Dis: {round(distance,2)} inch', (x+5,y+13), FONTS, 0.48, GREEN, 2)
 
-    cv.imshow('frame',frame)
+#     cv.imshow('frame',frame)
     
-    key = cv.waitKey(1)
-    if key ==ord('q'):
-        break
-cv.destroyAllWindows()
-cap.release()
+#     key = cv.waitKey(1)
+#     if key ==ord('q'):
+#         break
+# cv.destroyAllWindows()
+# cap.release()
